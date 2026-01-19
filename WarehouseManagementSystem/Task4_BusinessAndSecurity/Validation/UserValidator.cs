@@ -1,0 +1,13 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+using WarehouseManagementSystem.Task2_UserManagement;
+
+namespace WarehouseManagementSystem.Task4_BusinessAndSecurity.Validation;
+
+public class UserValidator //: IValidator<User>
+{
+}
