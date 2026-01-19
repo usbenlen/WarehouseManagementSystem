@@ -8,7 +8,7 @@ namespace WarehouseManagementSystem.Task1_DataModel.Products;
 
 public abstract class Product
 {
-    private static int _id = 0;
+    private static int _id = 0; // статичне поле для призначення нового айді для кожного створеного продукту
     
     public int id { get; private set; }
     public string name { get; private set; }

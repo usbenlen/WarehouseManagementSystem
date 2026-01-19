@@ -6,9 +6,9 @@ using System.Threading.Tasks;
 
 namespace WarehouseManagementSystem.Task1_DataModel.Products;
 
-public class PerishableProduct : Product
+public class PerishableProduct : Product 
 {
-    public DateTime expiryDate{ get; private set; }
+    public DateTime expiryDate{ get; private set; } // термін придатності
 
     public PerishableProduct(DateTime expiryDate,
         string name,
@@ -19,12 +19,12 @@ public class PerishableProduct : Product
         this.expiryDate = expiryDate;
     }
 
-    public bool IsExpired()
+    public bool IsExpired() // перевірка терміна придатності
     {
         return DateTime.Now.Date > expiryDate;
     }
 
-    public override void GetStorageRequirements()
+    public override void GetStorageRequirements() // рекомендації щодо зберігання - "зберігати в холодному приміщенні"
     {
         Console.WriteLine("Store in cold place");
     }

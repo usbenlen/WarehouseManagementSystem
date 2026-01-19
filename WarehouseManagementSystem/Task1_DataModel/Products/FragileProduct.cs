@@ -8,7 +8,7 @@ namespace WarehouseManagementSystem.Task1_DataModel.Products;
 
 public class FragileProduct : Product
 {
-    public double maxShakingHeight { get; private set; }
+    public double maxShakingHeight { get; private set; } // максимальний рівень вібрацій який може витримати продукт
 
     public FragileProduct(double maxShakingHeight,
         string name,
@@ -20,8 +20,8 @@ public class FragileProduct : Product
         this.maxShakingHeight = maxShakingHeight;
     }
 
-    public override void GetStorageRequirements()
+    public override void GetStorageRequirements() // рекомендації щодо зберігання
     {
-        Console.WriteLine($"Max Shaking Height: {this.maxShakingHeight} m.");
+        Console.WriteLine($"Max Shaking Height: {this.maxShakingHeight} m."); 
     }
 }

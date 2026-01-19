@@ -8,8 +8,8 @@ namespace WarehouseManagementSystem.Task1_DataModel.Products;
 
 public class Electronics : Product
 {
-    public DateTime warrantyPeriod { get; private set; }
-    public double voltage { get; private set; }
+    public DateTime warrantyPeriod { get; private set; } // Дата кінця гарантії
+    public double voltage { get; private set; } 
 
     public Electronics(DateTime warrantyPeriod,
         double voltage,
@@ -22,13 +22,13 @@ public class Electronics : Product
         this.voltage = voltage;
     }
 
-    public bool IsWarrantyPeriodValid()
+    public bool IsWarrantyPeriodValid() //  перевірка на дійсність гарантії
     {
         return DateTime.Now.Date <  this.warrantyPeriod.Date;
     }
 
-    public override void GetStorageRequirements()
+    public override void GetStorageRequirements() // рекомендації для зберігання - "зберігати в сухому приміщенні"
     {
-        Console.WriteLine($"Store in a dry place.");
+        Console.WriteLine($"Store in a dry place."); 
     }
 }
