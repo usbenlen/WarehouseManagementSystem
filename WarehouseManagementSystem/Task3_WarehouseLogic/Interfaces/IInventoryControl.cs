@@ -11,8 +11,8 @@ namespace WarehouseManagementSystem.Task3_WarehouseLogic.Interfaces;
 public interface IInventoryControl
 {
     void AddProduct(Product product);
-    void RemoveProduct(string id);
-    Product? FindProduct(string id);
+    void RemoveProduct(Guid id);
+    Product? FindProduct(Guid id);
     void ShowProducts();
-    void UpdateProduct(string id);
+    void UpdateProduct(Guid id);
 }
