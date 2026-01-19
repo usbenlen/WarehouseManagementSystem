@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-using WmsSystem.Task1_DataModel.Products;
+using WarehouseManagementSystem.Task1_DataModel.Products;
 
 namespace WarehouseManagementSystem.Task4_BusinessAndSecurity.Filtering;
 
