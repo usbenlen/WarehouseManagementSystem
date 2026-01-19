@@ -8,4 +8,5 @@ namespace WarehouseManagementSystem.Task2_UserManagement;
 
 public abstract class User
 {
+    
 }

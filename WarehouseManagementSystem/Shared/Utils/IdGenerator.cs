@@ -4,8 +4,8 @@ namespace WarehouseManagementSystem.Shared.Utils;
 
 public static class IdGenerator
 {
-    public static string Generate()
+    public static Guid Generate()
     {
-        return Guid.NewGuid().ToString("N");
+        return Guid.NewGuid();
     }
 }

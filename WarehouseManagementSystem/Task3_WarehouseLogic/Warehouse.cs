@@ -50,7 +50,7 @@ public class Warehouse : IInventoryControl, IComparer<Product>
     {
         if (product.quantity < LowStockThreshold)
         {
-            
+            OnLowStockAlert(product);
         }
     }
 
@@ -70,21 +70,21 @@ public class Warehouse : IInventoryControl, IComparer<Product>
         else
         {
             ChangeMenu.ShowMenu();
-            if(!int.TryParse(Console.ReadLine(), out int choice));
+            if (!int.TryParse(Console.ReadLine(), out int choice))
+            {
+                Console.WriteLine("Invalid choice");
+                return;
+            }
             switch (choice)
             {
                 case 1:
                 {
-                    Console.WriteLine($"Enter new price for {product.name}");
-                    double price = double.Parse(Console.ReadLine());
-                    product.ChangePrice(price);
+                    product.ChangePrice();
                     break;
                 }
                 case 2:
                 {
-                    Console.WriteLine($"Enter new quantity for {product.name}");
-                    int quantity = int.Parse(Console.ReadLine());
-                    product.ChangeQuantity(quantity);
+                    product.ChangeQuantity();
                     CheckStock(product);
                     break;
                 }
