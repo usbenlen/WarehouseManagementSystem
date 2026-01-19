@@ -25,4 +25,9 @@ public abstract class Product
         this.quantity = quantity;
     }
     public abstract void GetStorageRequirements();
+    
+    public override string ToString()
+    {
+        return $"Name: {this.name}, Price: {this.basePrice}, Weight: {this.weight}, Quantity: {this.quantity}";
+    }
 }

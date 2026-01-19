@@ -28,9 +28,4 @@ public class PerishableProduct : Product
     {
         Console.WriteLine("Store in cold place");
     }
-
-    public override string ToString()
-    {
-        return $"Name: {this.name}, Price: {this.basePrice}, Weight: {this.weight}, Quantity: {this.quantity}";
-    }
 }
