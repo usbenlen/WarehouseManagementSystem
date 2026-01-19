@@ -25,8 +25,4 @@ public abstract class Product
     }
     public abstract void GetStorageRequirements();
     
-    public override string ToString()
-    {
-        return $"Id: {id}, Name: {this.name}, Price: {this.basePrice}, Weight: {this.weight}, Quantity: {this.quantity}";
-    }
 }

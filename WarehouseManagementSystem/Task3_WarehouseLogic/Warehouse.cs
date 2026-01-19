@@ -20,6 +20,7 @@ public class Warehouse : IInventoryControl
     public void AddProduct(Product product)
     {
         products.Add(product);
+        products.OrderBy(p => p is not PerishableProduct).ToList();
     }
 
     public void RemoveProduct(string id)

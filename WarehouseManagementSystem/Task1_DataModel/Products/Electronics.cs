@@ -31,4 +31,8 @@ public class Electronics : Product
     {
         Console.WriteLine($"Store in a dry place."); 
     }
+    public override string ToString()
+    {
+        return $"Id: {id}, Name: {this.name}, Price: {this.basePrice}, Weight: {this.weight}, Quantity: {this.quantity} , Warranty Period: {this.warrantyPeriod} , Voltage: {this.voltage}";
+    }
 }

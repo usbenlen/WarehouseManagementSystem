@@ -11,7 +11,8 @@ internal class Program
         //Код тестувати тут
         Warehouse warehouse = new Warehouse();
         warehouse.AddProduct(new PerishableProduct(DateTime.Now.Date,"Banana", 5,4,100));
-        warehouse.AddProduct(new PerishableProduct(DateTime.Now.Date,"Pepperoni", 5,4,100));
+        warehouse.AddProduct(new PerishableProduct(DateTime.Now.AddDays(14),"Pepperoni", 5,4,100));
+        
         warehouse.ShowProducts();
     }
 }

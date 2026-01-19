@@ -24,4 +24,8 @@ public class FragileProduct : Product
     {
         Console.WriteLine($"Max Shaking Height: {this.maxShakingHeight} m."); 
     }
+    public override string ToString()
+    {
+        return $"Id: {id}, Name: {this.name}, Price: {this.basePrice}, Weight: {this.weight}, Quantity: {this.quantity} , Max shacking height: {maxShakingHeight}";
+    }
 }
