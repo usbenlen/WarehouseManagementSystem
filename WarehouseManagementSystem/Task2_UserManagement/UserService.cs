@@ -1,20 +1,51 @@
+using Newtonsoft.Json;
 using WarehouseManagementSystem.Shared.Enums;
 
 namespace WarehouseManagementSystem.Task2_UserManagement;
 
 public class UserService : IUserService
 {
-    private readonly List<User> _users = new();
+    private readonly List<User> _users;
 
-    public User Register(string name, UserRole role )
+    public UserService()
     {
-        var user = new User(name, role);
+        if (DeserializeUsers() != null)
+        {
+            _users = DeserializeUsers();
+        }
+        else
+        {
+            _users = new();
+            _users.Add(new User("Admin","Admin",UserRole.Admin));
+        }
+    }
+    public User Register(string name, string password, UserRole role )
+    {
+        var user = new User(name, password, role);
         _users.Add(user);
         return user;
+    }
+
+    public void DeleteUser(Guid userId)
+    {
+        User? user = GetUser(userId);
+        if (user == null)
+        {
+            Console.WriteLine("Unknown id");
+            Console.ReadKey();
+            return;
+        }
+        _users.Remove(user);
     }
     public User? GetUser(Guid userId)
     {
         return _users.FirstOrDefault(u => u.Id == userId);
+    }
+
+    public User? GetUserLogin(string name, string password)
+    {
+        return _users.FirstOrDefault(u => u.UserName == name && u.Password == password);
+            
     }
 
     public void BlockUser(Guid userId)
@@ -31,5 +62,20 @@ public class UserService : IUserService
     {
         var user = GetUser(userId);
         user?.ChangeRole(role);
+    }
+
+    public void FlushToFileUser()
+    {
+        string json = JsonConvert.SerializeObject(_users);
+        File.WriteAllText("users.json", json);
+    }
+    private List<User>? DeserializeUsers()
+    {
+        if (File.Exists("users.json"))
+        {
+            var data = JsonConvert.DeserializeObject<List<User>>(File.ReadAllText("users.json"));
+        }
+        return null;
+        
     }
 }

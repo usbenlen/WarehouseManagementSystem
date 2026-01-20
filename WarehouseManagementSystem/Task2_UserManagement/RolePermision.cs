@@ -14,12 +14,21 @@ public static class RolePermision
         },
         [UserRole.Manager] = new[]
         {
+            LogActionType.AddProduct,
+            LogActionType.RemoveProduct,
+            LogActionType.UpdateQuantity,
             LogActionType.PriceChange
         },
         [UserRole.Admin] = new[]
         {
+            LogActionType.AddProduct,
+            LogActionType.RemoveProduct,
+            LogActionType.UpdateQuantity,
+            LogActionType.PriceChange,
             LogActionType.UserBlocked,
-            LogActionType.UserUnblocked
+            LogActionType.UserUnblocked,
+            LogActionType.RemoveUser,
+            LogActionType.AddUser
         }
     };
     public static IReadOnlyCollection<LogActionType> getRoles(UserRole role) => roles[role];

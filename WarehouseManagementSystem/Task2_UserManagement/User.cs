@@ -11,20 +11,31 @@ namespace WarehouseManagementSystem.Task2_UserManagement;
 public class User
 {
     public Guid Id { get; }
-    public string UserName { get; }
-    public UserRole Role { get; private set; }
+    public string UserName { get; private set; }
+    public string Password { get; private set; }
+    public UserRole? Role { get; private set; }
     public bool IsBlocked { get; private set; }
 
-    public User(string userName, UserRole role)
+    public User(string userName, string password, UserRole role)
     {
         Id = IdGenerator.Generate();
         UserName = userName;
+        Password = password;
         Role = role;
         IsBlocked = false;
     }
     public void ChangeRole(UserRole role)
     {
         Role = role;
+    }
+
+    public void ChangeName(string name)
+    {
+        UserName = name;
+    }
+    public void ChangePassword(string password)
+    {
+        Password = password;
     }
     public void Block() => IsBlocked = true;
     public void Unblock() => IsBlocked = false;

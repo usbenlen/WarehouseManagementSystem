@@ -7,5 +7,7 @@ public enum LogActionType
     UpdateQuantity,
     PriceChange,
     UserBlocked,
-    UserUnblocked
+    UserUnblocked,
+    AddUser,
+    RemoveUser,
 }

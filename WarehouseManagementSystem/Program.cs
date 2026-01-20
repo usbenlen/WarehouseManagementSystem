@@ -27,7 +27,8 @@ internal class Program
             userValidator ,
             logger
             ,userService);
-        var currentUser = new User("Admin", UserRole.Admin);
+        var loginMenu = new LoginMenu(service);
+        var currentUser = loginMenu.Login();
         var menu = new MainMenu(service, currentUser);
         menu.Show();
         

@@ -1,4 +1,5 @@
 using System.Data;
+using WarehouseManagementSystem.Shared.Enums;
 using WarehouseManagementSystem.Task1_DataModel.Products;
 using WarehouseManagementSystem.Task3_WarehouseLogic;
 using WarehouseManagementSystem.Task4_BusinessAndSecurity.Validation;
@@ -25,6 +26,21 @@ public class WarehouseService
         _usersValidator = usersValidator;
         _logger = logger;
         _userService = userService;
+    }
+
+    public void AddUser(string name, string password, UserRole role)
+    {
+        _userService.Register(name, password, role);
+    }
+
+    public void RemoveUser(Guid userId)
+    {
+        _userService.DeleteUser(userId);
+    }
+
+    public User? GetUser(string userName, string password)
+    {
+        return _userService.GetUserLogin(userName, password);
     }
 
     public void ShowProducts(User user)

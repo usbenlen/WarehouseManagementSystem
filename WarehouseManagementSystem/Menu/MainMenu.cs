@@ -19,35 +19,11 @@ public class MainMenu
 
     public void Show()
     {
-        while (true)
+        switch (_currentUser.Role)
         {
-            Console.Clear();
-            Console.WriteLine("=== Warehouse Management System ===");
-            Console.WriteLine("1. Add product");
-            Console.WriteLine("2. Remove product");
-            Console.WriteLine("3. Update product");
-            Console.WriteLine("4. Show products");
-            Console.WriteLine("5. Block user");
-            Console.WriteLine("6. Unblock user");
-            Console.WriteLine("0. Exit");
-            Console.WriteLine();
-            Console.Write("Select an option: ");
-            var choice = Console.ReadLine();
-
-            switch (choice)
-            {
-                case "1": AddProductMenu(); break;
-                case "2": RemoveProductMenu(); break;
-                case "3": UpdateProductMenu(); break;
-                case "4": ShowProductMenu(); break;
-                case "5": BlockUserMenu(); break;
-                case "6": UnblockUserMenu(); break;
-                case "0": return;
-                default:
-                    Console.WriteLine("Invalid option.");
-                    Console.ReadKey();
-                    break;
-            }
+                case UserRole.Admin: { AdminMenu(); break; }
+                case UserRole.Storekeeper: { StorekeeperMenu(); break; }
+                case UserRole.Manager: { ManageMenu(); break; }
         }
     }
 
@@ -264,5 +240,157 @@ public class MainMenu
             return;
         }
         _service.UnblockUser(_currentUser, userId);
+    }
+    private void AddUserMenu()
+    {
+        Console.Clear();
+        Console.WriteLine("=== Add User ===");
+        Console.Write("Enter user name: ");
+        var userName = Console.ReadLine();
+        Console.Write("Enter password: ");
+        var password = Console.ReadLine();
+        Console.WriteLine("Enter role: ");
+        foreach (var role in Enum.GetValues(typeof(UserRole)))
+        {
+            Console.WriteLine($"{(int)role}. {role}");
+        }
+
+        if (!int.TryParse(Console.ReadLine(), out int choice))
+        {
+            Console.WriteLine("Invalid choice.");
+            Console.ReadKey();
+            return;
+        }
+
+        switch (choice)
+        {
+            case 1:
+            {
+                _service.AddUser(userName, password, UserRole.Storekeeper);
+                break;
+            }
+            case 2:
+            {
+                _service.AddUser(userName, password, UserRole.Manager);
+                break;
+            }
+            case 3:
+            {
+                _service.AddUser(userName, password, UserRole.Admin);
+                break;
+            }
+            default:
+                Console.WriteLine("Invalid choice.");
+                Console.ReadKey();
+                break;
+        }
+    }
+
+    private void RemoveUserMenu()
+    {
+        Console.Clear();
+        Console.WriteLine("=== Remove User ===");
+        Console.Write("Enter user id: ");
+        if (!Guid.TryParse(Console.ReadLine(), out Guid userId))
+        {
+            Console.WriteLine("Invalid product id.");
+            Console.ReadKey();
+            return;
+        }
+        _service.RemoveUser(userId);
+    }
+    private void AdminMenu()
+    {
+        while (true)
+        {
+            Console.Clear();
+            Console.WriteLine("=== Warehouse Management System ===");
+            Console.WriteLine("1. Add product");
+            Console.WriteLine("2. Remove product");
+            Console.WriteLine("3. Update product");
+            Console.WriteLine("4. Show products");
+            Console.WriteLine("5. Block user");
+            Console.WriteLine("6. Unblock user");
+            Console.WriteLine("7. Add user");
+            Console.WriteLine("8. Delete user");
+            Console.WriteLine("0. Exit");
+            Console.WriteLine();
+            Console.Write("Select an option: ");
+            var choice = Console.ReadLine();
+
+            switch (choice)
+            {
+                case "1": AddProductMenu(); break;
+                case "2": RemoveProductMenu(); break;
+                case "3": UpdateProductMenu(); break;
+                case "4": ShowProductMenu(); break;
+                case "5": BlockUserMenu(); break;
+                case "6": UnblockUserMenu(); break;
+                case "7": AddUserMenu(); break;
+                case "8": RemoveUserMenu(); break;
+                case "0": return;
+                default:
+                    Console.WriteLine("Invalid option.");
+                    Console.ReadKey();
+                    break;
+            }
+        }
+    }
+    private void StorekeeperMenu()
+    {
+        while (true)
+        {
+            Console.Clear();
+            Console.WriteLine("=== Warehouse Management System ===");
+            Console.WriteLine("1. Add product");
+            Console.WriteLine("2. Remove product");
+            Console.WriteLine("3. Update product");
+            Console.WriteLine("0. Exit");
+            Console.WriteLine();
+            Console.Write("Select an option: ");
+            var choice = Console.ReadLine();
+
+            switch (choice)
+            {
+                case "1": AddProductMenu(); break;
+                case "2": RemoveProductMenu(); break;
+                case "3": UpdateProductMenu(); break;
+                case "0": return;
+                default:
+                    Console.WriteLine("Invalid option.");
+                    Console.ReadKey();
+                    break;
+            }
+        }
+    }
+
+    public void ManageMenu()
+    {
+        while (true)
+        {
+            Console.Clear();
+            Console.WriteLine("=== Warehouse Management System ===");
+            Console.WriteLine("1. Add product");
+            Console.WriteLine("2. Remove product");
+            Console.WriteLine("3. Update product");
+            Console.WriteLine("4. Show products");
+            Console.WriteLine("0. Exit");
+            Console.WriteLine();
+            Console.Write("Select an option: ");
+            var choice = Console.ReadLine();
+
+            switch (choice)
+            {
+                case "1": AddProductMenu(); break;
+                case "2": RemoveProductMenu(); break;
+                case "3": UpdateProductMenu(); break;
+                case "4": ShowProductMenu(); break;
+                case "0": return;
+                default:
+                    Console.WriteLine("Invalid option.");
+                    Console.ReadKey();
+                    break;
+            }
+        }
     }
 }

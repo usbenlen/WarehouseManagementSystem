@@ -2,7 +2,7 @@
 
 public enum UserRole
 {
-    Storekeeper,
+    Storekeeper = 1,
     Manager,
     Admin
 }
