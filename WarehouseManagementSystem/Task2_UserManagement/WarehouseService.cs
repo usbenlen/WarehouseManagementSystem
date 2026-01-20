@@ -12,16 +12,25 @@ public class WarehouseService
     private readonly IValidator<Product> _productsValidator;
     private readonly IValidator<User> _usersValidator;
     private readonly ILogger _logger;
+    private readonly IUserService _userService;
     
     public WarehouseService(Warehouse warehouse
     , IValidator<Product> productsValidator
     , IValidator<User> usersValidator
-    , ILogger logger)
+    , ILogger logger
+    , IUserService userService)
     {
         _warehouse = warehouse;
         _productsValidator = productsValidator;
         _usersValidator = usersValidator;
         _logger = logger;
+        _userService = userService;
+    }
+
+    public void ShowProducts(User user)
+    {
+        _warehouse.ShowProducts();
+        _logger.Info($"User: {user.UserName} looked products. {DateTime.Now}");
     }
     public void AddProduct(User user, Product product)
     {
@@ -50,7 +59,7 @@ public class WarehouseService
         _logger.Info($"User: {user.UserName} Successfully added \"{product.name}\". {DateTime.Now}");
     }
 
-    public void RemoveProduct(User user, Product product)
+    public void RemoveProduct(User user, Guid productId)
     {
         var userValidationResult = _usersValidator.Validate(user);
         if (!userValidationResult.IsValid)
@@ -65,11 +74,11 @@ public class WarehouseService
             _logger.Warn($"User: {user.UserName} is not allowed to remove product. {DateTime.Now}");
             return;
         }
-        _warehouse.RemoveProduct(product.id);
-        _logger.Info($"User: {user.UserName} Successfully removed \"{product.name}\". {DateTime.Now}");
+        _warehouse.RemoveProduct(productId);
+        _logger.Info($"User: {user.UserName} Successfully removed id:\"{productId}\". {DateTime.Now}");
     }
 
-    public void BlockUser(User user, User user2)
+    public void BlockUser(User user, Guid userId)
     {
         var userValidationResult = _usersValidator.Validate(user);
         if (!userValidationResult.IsValid)
@@ -78,7 +87,7 @@ public class WarehouseService
             _logger.Warn($"Blocked User:{user.UserName} tried to block user. {DateTime.Now}");
             return;
         }
-        if(user == user2) {return;}
+        if(user.Id == userId) {return;}
 
         if (!AccessControl.CanManageUsers(user))
         {
@@ -86,11 +95,11 @@ public class WarehouseService
             _logger.Warn($"User: {user.UserName} is not allowed to block users. {DateTime.Now}");
             return;
         }
-        user2.Block();
-        _logger.Info($"User: {user.UserName} Successfully banned {user2.UserName}. {DateTime.Now}");
+        _userService.BlockUser(userId);
+        _logger.Info($"User: {user.UserName} Successfully banned {_userService.GetUser(userId)?.UserName}. {DateTime.Now}");
     }
 
-    public void UnblockUser(User user, User user2)
+    public void UnblockUser(User user, Guid userId)
     {
         var userValidationResult = _usersValidator.Validate(user);
         if (!userValidationResult.IsValid)
@@ -99,7 +108,7 @@ public class WarehouseService
             _logger.Warn($"Blocked User:{user.UserName} tried to unblock user. {DateTime.Now}");
             return;
         }
-        if(user == user2) {return;}
+        if(user.Id == userId) {return;}
 
         if (!AccessControl.CanManageUsers(user))
         {
@@ -107,8 +116,8 @@ public class WarehouseService
             _logger.Warn($"User: {user.UserName} is not allowed to unblock users. {DateTime.Now}");
             return;
         }
-        user2.Unblock();
-        _logger.Info($"User: {user.UserName} Successfully unbanned {user2.UserName}. {DateTime.Now}");
+        _userService.BlockUser(userId);
+        _logger.Info($"User: {user.UserName} Successfully unbanned {_userService.GetUser(userId)?.UserName}. {DateTime.Now}");
     }
 
     public void UpdateProduct(User user, Guid id, int choice, double? price, int? quantity)

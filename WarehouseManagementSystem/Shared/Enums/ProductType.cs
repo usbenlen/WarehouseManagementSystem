@@ -2,7 +2,7 @@
 
 public enum ProductType
 {
-    Perishable,
+    Perishable = 1,
     Electronics,
     Fragile
 }
