@@ -1,6 +1,12 @@
 ﻿//Щоб мати доступ до коду з папки в головній програмі
+
+using WarehouseManagementSystem.Menu;
+using WarehouseManagementSystem.Shared.Enums;
 using WarehouseManagementSystem.Task1_DataModel.Products;
+using WarehouseManagementSystem.Task2_UserManagement;
 using WarehouseManagementSystem.Task3_WarehouseLogic;
+using WarehouseManagementSystem.Task4_BusinessAndSecurity.Logging;
+using WarehouseManagementSystem.Task4_BusinessAndSecurity.Validation;
 
 namespace WarehouseManagementSystem;
 
@@ -9,9 +15,22 @@ internal class Program
     static void Main(string[] args)
     {
         //Код тестувати тут
-        Warehouse warehouse = new Warehouse();
-        warehouse.AddProduct(new PerishableProduct(DateTime.Now.Date,"Banana", 5,4,100));
-        warehouse.AddProduct(new PerishableProduct(DateTime.Now.AddDays(14),"Pepperoni", 5,4,100));
-        warehouse.ShowProducts();
+        var warehouse =  new Warehouse();
+        var logger = new Logger();
+        var productValidator = new ProductValidator();
+        var userValidator = new UserValidator();
+        var userService = new UserService();
+        
+        var service = new WarehouseService(
+            warehouse,
+            productValidator,
+            userValidator ,
+            logger
+            ,userService);
+        var currentUser = new User("Admin", UserRole.Admin);
+        var menu = new MainMenu(service, currentUser);
+        menu.Show();
+        
+        logger.FlushToFile();
     }
 }

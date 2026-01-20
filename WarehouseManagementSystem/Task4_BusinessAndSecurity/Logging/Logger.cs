@@ -24,4 +24,9 @@ public class Logger : ILogger
     {
         LogInfo.Add(message);
     }
+
+    public void FlushToFile()
+    {
+        File.WriteAllLines(Directory.GetCurrentDirectory() + "Log.txt", LogInfo);
+    }
 }
