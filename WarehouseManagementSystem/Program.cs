@@ -1,5 +1,5 @@
 ﻿//Щоб мати доступ до коду з папки в головній програмі
-
+using System.Globalization;
 using WarehouseManagementSystem.Menu;
 using WarehouseManagementSystem.Shared.Enums;
 using WarehouseManagementSystem.Task1_DataModel.Products;

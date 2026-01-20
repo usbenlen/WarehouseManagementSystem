@@ -1,3 +1,4 @@
+using System.Globalization;
 using WarehouseManagementSystem.Shared.Enums;
 using WarehouseManagementSystem.Task1_DataModel.Products;
 using WarehouseManagementSystem.Task2_UserManagement;
@@ -68,21 +69,30 @@ public class MainMenu
         string? productName = Console.ReadLine();
         
         Console.Write("Enter product price:");
-        if (!double.TryParse(Console.ReadLine(), out double productPrice))
+        if (!double.TryParse(Console.ReadLine(),
+                NumberStyles.Any,
+                CultureInfo.InvariantCulture,
+                out double productPrice))
         {
             Console.WriteLine("Invalid product price.");
             Console.ReadKey();
+            return;
         }
         Console.Write("Enter product weight:");
-        if (!double.TryParse(Console.ReadLine(), out double productWeight))
+        if (!double.TryParse(Console.ReadLine(),
+                NumberStyles.Any,
+                CultureInfo.InvariantCulture,
+                out double productWeight))
         {
             Console.WriteLine("Invalid product weight");
+            Console.ReadKey();
             return;
         }
         Console.Write("Enter product quantity:");
         if (!int.TryParse(Console.ReadLine(), out int productQuantity))
         {
             Console.WriteLine("Invalid product quantity.");
+            Console.ReadKey();
             return;
         }
         switch (option)
@@ -111,7 +121,10 @@ public class MainMenu
                     return;
                 }
                 Console.Write("Enter product voltage:");
-                if (!double.TryParse(Console.ReadLine(), out double voltage))
+                if (!double.TryParse(Console.ReadLine(),
+                        NumberStyles.Any,
+                        CultureInfo.InvariantCulture,
+                        out double voltage))
                 {
                     Console.WriteLine("Invalid product voltage.");
                     Console.ReadKey();
@@ -125,7 +138,10 @@ public class MainMenu
             case "3":
             {
                 Console.Write("Enter product max shaking height: ");
-                if (!double.TryParse(Console.ReadLine(), out double maxShakingHeight))
+                if (!double.TryParse(Console.ReadLine(),
+                        NumberStyles.Any,
+                        CultureInfo.InvariantCulture,
+                        out double maxShakingHeight))
                 {
                     Console.WriteLine("Invalid product max shaking height.");
                     Console.ReadKey();
@@ -184,7 +200,10 @@ public class MainMenu
             case 1:
             {
                 Console.Write("Enter new price: ");
-                if (!double.TryParse(Console.ReadLine(), out double newPrice))
+                if (!double.TryParse(Console.ReadLine(),
+                        NumberStyles.Any,
+                        CultureInfo.InvariantCulture,
+                        out double newPrice))
                 {
                     Console.WriteLine("Invalid product price.");
                     Console.ReadKey();
