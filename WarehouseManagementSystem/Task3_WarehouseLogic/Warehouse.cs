@@ -46,6 +46,28 @@ public class Warehouse : IInventoryControl, IComparer<Product>
         }
     }
 
+    public void ChangeProductPrice(Guid id , double price)
+    {
+        var product = FindProduct(id);
+        if (product == null)
+        {
+            return;
+        }
+
+        product.ChangePrice(price);
+    }
+
+    public void ChangeProductQuantity(Guid id, int quantity)
+    {
+        var product = FindProduct(id);
+        if (product == null)
+        {
+            return;
+        }
+        product.ChangeQuantity(quantity);
+        CheckStock(product);
+    }
+
     private void CheckStock(Product product)
     {
         if (product.quantity < LowStockThreshold)
@@ -57,42 +79,6 @@ public class Warehouse : IInventoryControl, IComparer<Product>
     private void OnLowStockAlert(Product product)
     {
         LowStockAlert?.Invoke(this,new LowStockEventArgs(product, product.quantity));
-    }
-
-    public void UpdateProduct(Guid id)
-    {
-        var product = FindProduct(id);
-        if (product == null)
-        {
-            Console.WriteLine($"Product {id} not found");
-            return;
-        }
-        else
-        {
-            ChangeMenu.ShowMenu();
-            if (!int.TryParse(Console.ReadLine(), out int choice))
-            {
-                Console.WriteLine("Invalid choice");
-                return;
-            }
-            switch (choice)
-            {
-                case 1:
-                {
-                    product.ChangePrice();
-                    break;
-                }
-                case 2:
-                {
-                    product.ChangeQuantity();
-                    CheckStock(product);
-                    break;
-                }
-                default:
-                    Console.WriteLine("Invalid operation");
-                    break;
-            }
-        }
     }
 
     public int Compare(Product? x, Product? y)

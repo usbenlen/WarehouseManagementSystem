@@ -24,35 +24,14 @@ public abstract class Product
         this.quantity = quantity;
     }
 
-    public void ChangePrice()
+    public void ChangePrice(double newPrice)
     {
-        Console.WriteLine($"Enter new price for {this.name}");
-        if (!double.TryParse(Console.ReadLine(), out double newPrice))
-        {
-            Console.WriteLine("Invalid input");
-            return;
-        }
-        if (newPrice < 0)
-        {
-            Console.WriteLine("Price cannot be negative");
-            return;
-        }
         basePrice = newPrice;
     }
 
-    public void ChangeQuantity()
+    public void ChangeQuantity(int newQuantity)
     {
-        Console.WriteLine($"Enter new quantity for {this.name}");
-        if (!int.TryParse(Console.ReadLine(), out int newQuantity))
-        {
-            Console.WriteLine("Invalid input");
-            return;
-        }
-        if (newQuantity < 0)
-        {
-            Console.WriteLine("Quantity cannot be negative");
-            return;
-        }
+        
         quantity = newQuantity;
     }
     public abstract void GetStorageRequirements();

@@ -14,5 +14,6 @@ public interface IInventoryControl
     void RemoveProduct(Guid id);
     Product? FindProduct(Guid id);
     void ShowProducts();
-    void UpdateProduct(Guid id);
+    void ChangeProductQuantity(Guid id, int quantity);
+    void ChangeProductPrice(Guid id , double price);
 }

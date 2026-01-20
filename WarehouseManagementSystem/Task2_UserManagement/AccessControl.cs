@@ -2,7 +2,7 @@ using WarehouseManagementSystem.Shared.Enums;
 
 namespace WarehouseManagementSystem.Task2_UserManagement;
 
-public static class AcessControl
+public static class AccessControl
 {
     public static bool CanAddProduct(User user) 
         => user.Role == UserRole.Storekeeper || user.Role == UserRole.Admin;

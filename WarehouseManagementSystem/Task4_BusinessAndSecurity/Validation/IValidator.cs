@@ -8,5 +8,5 @@ namespace WarehouseManagementSystem.Task4_BusinessAndSecurity.Validation;
 
 public interface IValidator<T>
 {
-    bool Validate(T entity);
+    ValidationResult Validate(T entity);
 }
