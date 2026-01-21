@@ -197,7 +197,8 @@ public class WarehouseService
 
     public void UpdateProduct(User user, Guid id, int choice, double? price, int? quantity)
     {
-        if (_usersValidator.Validate(user).IsValid)
+        var userValidationResult = _usersValidator.Validate(user);
+        if (!userValidationResult.IsValid)
         {
             Console.WriteLine("This user is blocked");
             _logger.Warn($"Blocked User:{user.UserName} tried to update product. {DateTime.Now}");
