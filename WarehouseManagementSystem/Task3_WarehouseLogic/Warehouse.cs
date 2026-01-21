@@ -40,11 +40,11 @@ public class Warehouse : IInventoryControl, IComparer<Product>
 
     public void RemoveProduct(Guid id)
     {
-        _products.RemoveAll(p => p.id == id);
+        _products.RemoveAll(p => p.Id == id);
     }
     public Product? FindProduct(Guid id)
     {
-        return _products.FirstOrDefault(p => p.id == id);
+        return _products.FirstOrDefault(p => p.Id == id);
     }
 
     public void ShowProducts()
@@ -79,7 +79,7 @@ public class Warehouse : IInventoryControl, IComparer<Product>
 
     private void CheckStock(Product product)
     {
-        if (product.quantity < LowStockThreshold)
+        if (product.Quantity < LowStockThreshold)
         {
             OnLowStockAlert(product);
         }
@@ -87,7 +87,7 @@ public class Warehouse : IInventoryControl, IComparer<Product>
 
     private void OnLowStockAlert(Product product)
     {
-        LowStockAlert?.Invoke(this,new LowStockEventArgs(product, product.quantity));
+        LowStockAlert?.Invoke(this,new LowStockEventArgs(product, product.Quantity));
     }
 
     public int Compare(Product? x, Product? y)

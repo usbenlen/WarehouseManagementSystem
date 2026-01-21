@@ -12,4 +12,5 @@ public interface IUserService
     User? GetUser(Guid userId);
     User? GetUserLogin(string userName, string password);
     void UserSave();
+    void Show(User currentUser);
 }

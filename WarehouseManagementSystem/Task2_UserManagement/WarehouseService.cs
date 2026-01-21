@@ -30,6 +30,19 @@ public class WarehouseService
         _userService = userService;
     }
 
+    public void ShowUsers(User user)
+    {
+        var userValidationResult = _usersValidator.Validate(user);
+        if (!userValidationResult.IsValid)
+        {
+            Console.WriteLine("This user is blocked");
+            _logger.Warn($"Blocked User:{user.UserName} tried show user. {DateTime.Now}");
+            Console.ReadKey();
+            return;
+        }
+        _userService.Show(user);
+        _logger.Info($"User: {user.UserName} show user. {DateTime.Now}");
+    }
     public void AuthLog(User user)
     {
         _logger.Info($"User: {user.UserName} logged in. {DateTime.Now}");
@@ -110,7 +123,7 @@ public class WarehouseService
             return;
         }
         _warehouse.AddProduct(product);
-        _logger.Info($"User: {user.UserName} Successfully added \"{product.name}\". {DateTime.Now}");
+        _logger.Info($"User: {user.UserName} Successfully added \"{product.Name}\". {DateTime.Now}");
     }
 
     public void RemoveProduct(User user, Guid productId)
@@ -137,7 +150,7 @@ public class WarehouseService
     public void BlockUser(User user, Guid userId)
     {
         var userValidationResult = _usersValidator.Validate(user);
-        if (userValidationResult.IsValid)
+        if (!userValidationResult.IsValid)
         {
             Console.WriteLine("This user is blocked");
             _logger.Warn($"Blocked User:{user.UserName} tried to block user. {DateTime.Now}");
@@ -154,6 +167,7 @@ public class WarehouseService
             return;
         }
         _userService.BlockUser(userId);
+        Console.WriteLine("User banned");
         _logger.Info($"User: {user.UserName} Successfully banned {_userService.GetUser(userId)?.UserName}. {DateTime.Now}");
     }
 
@@ -177,6 +191,7 @@ public class WarehouseService
             return;
         }
         _userService.BlockUser(userId);
+        Console.WriteLine("User unbanned");
         _logger.Info($"User: {user.UserName} Successfully unbanned {_userService.GetUser(userId)?.UserName}. {DateTime.Now}");
     }
 

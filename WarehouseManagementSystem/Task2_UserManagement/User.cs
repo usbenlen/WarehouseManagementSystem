@@ -57,4 +57,9 @@ public class User
     }
     public void Block() => IsBlocked = true;
     public void Unblock() => IsBlocked = false;
+
+    public override string ToString()
+    {
+        return $"Id: {Id},Name: {UserName}, Role: {Role.ToString()}, IsBlocked: {IsBlocked}";
+    }
 }

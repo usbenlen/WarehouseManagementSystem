@@ -9,8 +9,8 @@ namespace WarehouseManagementSystem.Task1_DataModel.Products;
 
 public class Electronics : Product
 {
-    public DateTime warrantyPeriod { get; set; } // Дата кінця гарантії
-    public double voltage { get; set; } 
+    public DateTime WarrantyPeriod { get; set; } // Дата кінця гарантії
+    public double Voltage { get; set; } 
 
     public Electronics(DateTime warrantyPeriod,
         double voltage,
@@ -19,8 +19,8 @@ public class Electronics : Product
         double weight,
         int quantity) : base(name, basePrice, weight, quantity)
     {
-        this.warrantyPeriod = warrantyPeriod;
-        this.voltage = voltage;
+        WarrantyPeriod = warrantyPeriod;
+        Voltage = voltage;
     }
 
     public Electronics(BoxProduct boxProduct) : base(boxProduct.Name,
@@ -28,14 +28,14 @@ public class Electronics : Product
         boxProduct.Weight,
         boxProduct.Quantity)
     {
-        warrantyPeriod = (DateTime)boxProduct.WarrantyDate;
-        voltage = (double)boxProduct.Voltage;
+        WarrantyPeriod = (DateTime)boxProduct.WarrantyDate;
+        Voltage = (double)boxProduct.Voltage;
     }
     
 
     public bool IsWarrantyPeriodValid() //  перевірка на дійсність гарантії
     {
-        return DateTime.Now.Date <  this.warrantyPeriod.Date;
+        return DateTime.Now.Date <  WarrantyPeriod.Date;
     }
 
     public override void GetStorageRequirements() // рекомендації для зберігання - "зберігати в сухому приміщенні"
@@ -44,6 +44,13 @@ public class Electronics : Product
     }
     public override string ToString()
     {
-        return $"Id: {id}, Name: {this.name}, Price: {this.basePrice}, Weight: {this.weight}, Quantity: {this.quantity} , Warranty Period: {this.warrantyPeriod} , Voltage: {this.voltage}";
+        return $"Id: {Id}," +
+               $" Name: {Name}," +
+               $" Price: {BasePrice}," +
+               $" Weight: {Weight}," +
+               $" Quantity: {Quantity}," +
+               $" Warranty Period: {WarrantyPeriod}," +
+               $" Voltage: {Voltage},"+
+               $" Is warranty period valid: {IsWarrantyPeriodValid()}";
     }
 }

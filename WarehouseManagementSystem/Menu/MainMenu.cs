@@ -223,7 +223,7 @@ public class MainMenu
         Console.Write("Enter user Id: ");
         if (!Guid.TryParse(Console.ReadLine(), out Guid userId))
         {
-            Console.WriteLine("Invalid product id.");
+            Console.WriteLine("Invalid user id.");
             Console.ReadKey();
             return;
         }
@@ -237,7 +237,7 @@ public class MainMenu
         Console.Write("Enter user Id: ");
         if (!Guid.TryParse(Console.ReadLine(), out Guid userId))
         {
-            Console.WriteLine("Invalid product id.");
+            Console.WriteLine("Invalid user id.");
             Console.ReadKey();
             return;
         }
@@ -301,6 +301,14 @@ public class MainMenu
         }
         _service.RemoveUser(_currentUser ,userId);
     }
+
+    private void ShowUserMenu()
+    {
+        Console.Clear();
+        Console.WriteLine("=== Users ===");
+        _service.ShowUsers(_currentUser);
+        Console.ReadKey();
+    }
     private void AdminMenu()
     {
         while (true)
@@ -315,6 +323,7 @@ public class MainMenu
             Console.WriteLine("6. Unblock user");
             Console.WriteLine("7. Add user");
             Console.WriteLine("8. Delete user");
+            Console.WriteLine("9. Show users");
             Console.WriteLine("0. Exit");
             Console.WriteLine();
             Console.Write("Select an option: ");
@@ -330,6 +339,7 @@ public class MainMenu
                 case "6": UnblockUserMenu(); break;
                 case "7": AddUserMenu(); break;
                 case "8": RemoveUserMenu(); break;
+                case "9": ShowUserMenu(); break;
                 case "0": return;
                 default:
                     Console.WriteLine("Invalid option.");

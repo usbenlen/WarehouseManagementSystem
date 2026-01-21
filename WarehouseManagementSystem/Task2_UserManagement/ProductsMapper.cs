@@ -13,12 +13,12 @@ public class ProductsMapper
             {
                 var productToBox = (PerishableProduct)product;
                 return new BoxProduct(type,
-                    productToBox.id,
-                    productToBox.name,
-                    productToBox.basePrice,
-                    productToBox.weight,
-                    productToBox.quantity,
-                    productToBox.expiryDate,
+                    productToBox.Id,
+                    productToBox.Name,
+                    productToBox.BasePrice,
+                    productToBox.Weight,
+                    productToBox.Quantity,
+                    productToBox.ExpiryDate,
                     null,
                     null,
                     null);
@@ -27,28 +27,28 @@ public class ProductsMapper
             {
                 var productToBox =  (FragileProduct)product;
                 return new BoxProduct(type,
-                    productToBox.id,
-                    productToBox.name,
-                    productToBox.basePrice,
-                    productToBox.weight,
-                    productToBox.quantity,
+                    productToBox.Id,
+                    productToBox.Name,
+                    productToBox.BasePrice,
+                    productToBox.Weight,
+                    productToBox.Quantity,
                     null,
                     null,
                     null,
-                    productToBox.maxShakingHeight);
+                    productToBox.MaxShakingHeight);
             }
             case "Electronics":
             {
                 var productToBox = (Electronics)product;
                 return new BoxProduct(type,
-                    productToBox.id,
-                    productToBox.name,
-                    productToBox.basePrice,
-                    productToBox.weight,
-                    productToBox.quantity,
+                    productToBox.Id,
+                    productToBox.Name,
+                    productToBox.BasePrice,
+                    productToBox.Weight,
+                    productToBox.Quantity,
                     null,
-                    productToBox.warrantyPeriod,
-                    productToBox.voltage,
+                    productToBox.WarrantyPeriod,
+                    productToBox.Voltage,
                     null);
             }
         }

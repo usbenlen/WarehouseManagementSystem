@@ -9,7 +9,7 @@ namespace WarehouseManagementSystem.Task1_DataModel.Products;
 
 public class FragileProduct : Product
 {
-    public double maxShakingHeight { get;  set; } // максимальний рівень вібрацій який може витримати продукт
+    public double MaxShakingHeight { get;  set; } // максимальний рівень вібрацій який може витримати продукт
 
     public FragileProduct(double maxShakingHeight,
         string name,
@@ -18,7 +18,7 @@ public class FragileProduct : Product
         int quantity)
         : base(name, basePrice, weight, quantity)
     {
-        this.maxShakingHeight = maxShakingHeight;
+        MaxShakingHeight = maxShakingHeight;
     }
 
     public FragileProduct(BoxProduct boxProduct) : base(boxProduct.Name, 
@@ -26,16 +26,21 @@ public class FragileProduct : Product
         boxProduct.Weight,
         boxProduct.Quantity)
     {
-        id = boxProduct.Id;
-        maxShakingHeight = (double)boxProduct.MaxShakingWeight;
+        Id = boxProduct.Id;
+        MaxShakingHeight = (double)boxProduct.MaxShakingWeight;
     }
 
     public override void GetStorageRequirements() // рекомендації щодо зберігання
     {
-        Console.WriteLine($"Max Shaking Height: {this.maxShakingHeight} m."); 
+        Console.WriteLine($"Max Shaking Height: {MaxShakingHeight} m."); 
     }
     public override string ToString()
     {
-        return $"Id: {id}, Name: {this.name}, Price: {this.basePrice}, Weight: {this.weight}, Quantity: {this.quantity} , Max shacking height: {maxShakingHeight}";
+        return $"Id: {Id}," +
+               $" Name: {Name}," +
+               $" Price: {BasePrice}," +
+               $" Weight: {Weight}," +
+               $" Quantity: {Quantity}," +
+               $" Max shacking height: {MaxShakingHeight}";
     }
 }

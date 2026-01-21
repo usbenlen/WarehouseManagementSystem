@@ -1,1 +1,1 @@
-[{"id":"02cbaf77-f784-4d75-b92f-b093ffd70738","userName":"admin","password":"admin","role":3,"isBlocked":false},{"id":"ad9710fb-6073-4837-9264-67b2daaa480e","userName":"ivan","password":"12345","role":1,"isBlocked":false}]
+[{"id":"02cbaf77-f784-4d75-b92f-b093ffd70738","userName":"admin","password":"admin","role":3,"isBlocked":false},{"id":"ad9710fb-6073-4837-9264-67b2daaa480e","userName":"ivan","password":"12345","role":1,"isBlocked":true},{"id":"36f8d517-12e5-4d06-a6c0-5a6c74c56c5d","userName":"Admin2","password":"admin","role":3,"isBlocked":false}]

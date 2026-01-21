@@ -9,7 +9,7 @@ namespace WarehouseManagementSystem.Task1_DataModel.Products;
 
 public class PerishableProduct : Product 
 {
-    public DateTime expiryDate{ get; set; } // термін придатності
+    public DateTime ExpiryDate{ get; set; } // термін придатності
 
     public PerishableProduct(DateTime expiryDate,
         string name,
@@ -17,7 +17,7 @@ public class PerishableProduct : Product
         double weight,
         int quantity) : base(name, price, weight, quantity)
     {
-        this.expiryDate = expiryDate;
+        ExpiryDate = expiryDate;
     }
 
     public PerishableProduct(BoxProduct boxProduct) : base(boxProduct.Name,
@@ -25,13 +25,13 @@ public class PerishableProduct : Product
         boxProduct.Weight,
         boxProduct.Quantity)
     {
-        id = boxProduct.Id;
-        expiryDate = (DateTime)boxProduct.ExpiryDate;
+        Id = boxProduct.Id;
+        ExpiryDate = (DateTime)boxProduct.ExpiryDate;
     }
 
     public bool IsExpired() // перевірка терміна придатності
     {
-        return DateTime.Now.Date > expiryDate;
+        return DateTime.Now.Date > ExpiryDate;
     }
 
     public override void GetStorageRequirements() // рекомендації щодо зберігання - "зберігати в холодному приміщенні"
@@ -40,6 +40,12 @@ public class PerishableProduct : Product
     }
     public override string ToString()
     {
-        return $"Id: {id}, Name: {this.name}, Price: {this.basePrice}, Weight: {this.weight}, Quantity: {this.quantity} , Data expiration: {expiryDate}";
+        return $"Id: {Id}," +
+               $" Name: {Name}," +
+               $" Price: {BasePrice}," +
+               $" Weight: {Weight}," +
+               $" Quantity: {Quantity}," +
+               $" Expiry date: {ExpiryDate},"+
+               $" IsExpired: {IsExpired()}";
     }
 }

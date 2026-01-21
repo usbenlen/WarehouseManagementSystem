@@ -13,9 +13,9 @@ public class LoginMenu
 
     public User Login()
     {
-        Console.Clear();
         while (true)
         {
+            Console.Clear();
             Console.Write("Username: ");
             var userName = Console.ReadLine();
             Console.Write("Password: ");

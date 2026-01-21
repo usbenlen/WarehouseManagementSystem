@@ -7,7 +7,7 @@ public class UserService : IUserService
 {
     private readonly List<User> _users;
     private readonly UserStorage _userStorage;
-
+    
     public UserService(UserStorage userStorage)
     {
         _userStorage = userStorage;
@@ -15,6 +15,22 @@ public class UserService : IUserService
         if (_users.Count == 0)
         {
             _users.Add(new User("admin","admin", UserRole.Admin));
+        }
+    }
+
+    public void Show(User currentUser)
+    {
+        foreach (var user in _users)
+        {
+            if (user.Id == currentUser.Id)
+            {
+                Console.Write(user);
+                Console.WriteLine(" <=== You");
+            }
+            else
+            {
+                Console.WriteLine(user);
+            }
         }
     }
     public User Register(string name, string password, UserRole role )

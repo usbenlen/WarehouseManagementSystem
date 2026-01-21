@@ -1,2 +1,2 @@
-User: admin logged in. 21.01.2026 22:21:14
-User: admin looked products. 21.01.2026 22:21:16
+User: Admin2 logged in. 21.01.2026 23:18:23
+User: Admin2 show user. 21.01.2026 23:18:26

@@ -11,7 +11,7 @@ public class Notification
 
     public void LowStockAlert(object sender, LowStockEventArgs e)
     {
-        Console.WriteLine($"{e.Product.name} remain {e.CurrentQuantity}");
+        Console.WriteLine($"{e.Product.Name} remain {e.CurrentQuantity}");
     }
     
 }
