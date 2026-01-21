@@ -3,12 +3,13 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using WarehouseManagementSystem.Task2_UserManagement;
 
 namespace WarehouseManagementSystem.Task1_DataModel.Products;
 
 public class PerishableProduct : Product 
 {
-    public DateTime expiryDate{ get; private set; } // термін придатності
+    public DateTime expiryDate{ get; set; } // термін придатності
 
     public PerishableProduct(DateTime expiryDate,
         string name,
@@ -17,6 +18,15 @@ public class PerishableProduct : Product
         int quantity) : base(name, price, weight, quantity)
     {
         this.expiryDate = expiryDate;
+    }
+
+    public PerishableProduct(BoxProduct boxProduct) : base(boxProduct.Name,
+        boxProduct.Price,
+        boxProduct.Weight,
+        boxProduct.Quantity)
+    {
+        id = boxProduct.Id;
+        expiryDate = (DateTime)boxProduct.ExpiryDate;
     }
 
     public bool IsExpired() // перевірка терміна придатності

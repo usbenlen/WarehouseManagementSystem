@@ -27,7 +27,7 @@ public class Logger : ILogger
 
     public void FlushToFile()
     {
-        File.WriteAllLines(Directory.GetCurrentDirectory() + "Log.txt", LogInfo);
+        File.WriteAllLines( "savedInfo/Log.txt", LogInfo);
         
     }
 }

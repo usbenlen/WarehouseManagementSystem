@@ -3,12 +3,13 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using WarehouseManagementSystem.Task2_UserManagement;
 
 namespace WarehouseManagementSystem.Task1_DataModel.Products;
 
 public class FragileProduct : Product
 {
-    public double maxShakingHeight { get; private set; } // максимальний рівень вібрацій який може витримати продукт
+    public double maxShakingHeight { get;  set; } // максимальний рівень вібрацій який може витримати продукт
 
     public FragileProduct(double maxShakingHeight,
         string name,
@@ -18,6 +19,15 @@ public class FragileProduct : Product
         : base(name, basePrice, weight, quantity)
     {
         this.maxShakingHeight = maxShakingHeight;
+    }
+
+    public FragileProduct(BoxProduct boxProduct) : base(boxProduct.Name, 
+        boxProduct.Price,
+        boxProduct.Weight,
+        boxProduct.Quantity)
+    {
+        id = boxProduct.Id;
+        maxShakingHeight = (double)boxProduct.MaxShakingWeight;
     }
 
     public override void GetStorageRequirements() // рекомендації щодо зберігання

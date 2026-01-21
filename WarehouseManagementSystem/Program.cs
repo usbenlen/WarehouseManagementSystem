@@ -19,7 +19,8 @@ internal class Program
         var logger = new Logger();
         var productValidator = new ProductValidator();
         var userValidator = new UserValidator();
-        var userService = new UserService();
+        var userStorage = new UserStorage();
+        var userService = new UserService(userStorage);
         
         var service = new WarehouseService(
             warehouse,

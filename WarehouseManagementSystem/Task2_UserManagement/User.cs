@@ -10,7 +10,7 @@ namespace WarehouseManagementSystem.Task2_UserManagement;
 
 public class User
 {
-    public Guid Id { get; }
+    public Guid Id { get; private set; }
     public string UserName { get; private set; }
     public string Password { get; private set; }
     public UserRole? Role { get; private set; }
@@ -23,6 +23,24 @@ public class User
         Password = password;
         Role = role;
         IsBlocked = false;
+    }
+    
+    private User(Guid id, string userName, string password, UserRole? role, bool isBlocked)
+    {
+        Id = id;
+        UserName = userName;
+        Password = password;
+        Role = role;
+        IsBlocked = isBlocked;
+    }
+
+    public static User Restore(Guid id
+        , string userName,
+        string password,
+        UserRole? role,
+        bool isBlocked)
+    {
+        return new User(id, userName, password, role, isBlocked);
     }
     public void ChangeRole(UserRole role)
     {

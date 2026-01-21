@@ -11,4 +11,5 @@ public interface IUserService
     void UserChangeRole(Guid userId, UserRole role);
     User? GetUser(Guid userId);
     User? GetUserLogin(string userName, string password);
+    void UserSave();
 }

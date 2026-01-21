@@ -10,22 +10,27 @@ namespace WarehouseManagementSystem.Task4_BusinessAndSecurity.Validation;
 
 public class ProductValidator : IValidator<Product>
 {
-    public ValidationResult Validate(Product entity)
+    public ValidationResult Validate(Product product)
     {
         var result = new ValidationResult();
-        if (string.IsNullOrWhiteSpace(entity.name))
+        if (string.IsNullOrWhiteSpace(product.name))
         {
             result.Errors.Add("Product name is required");
         }
 
-        if (entity.quantity < 0)
+        if (product.quantity < 0)
         {
             result.Errors.Add("Quantity can't be negative");
         }
 
-        if (entity.weight < 0)
+        if (product.weight < 0)
         {
             result.Errors.Add("Weight can't be negative");
+        }
+
+        if (product.basePrice < 0)
+        {
+            result.Errors.Add("Base Price can't be negative");
         }
         return result;
     }

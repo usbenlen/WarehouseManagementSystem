@@ -15,6 +15,7 @@ public class MainMenu
     {
         _service = service;
         _currentUser = currentUser;
+        _service.AuthLog(_currentUser);
     }
 
     public void Show()
@@ -25,6 +26,7 @@ public class MainMenu
                 case UserRole.Storekeeper: { StorekeeperMenu(); break; }
                 case UserRole.Manager: { ManageMenu(); break; }
         }
+        _service.Save();
     }
 
     private void AddProductMenu()
@@ -266,17 +268,17 @@ public class MainMenu
         {
             case 1:
             {
-                _service.AddUser(userName, password, UserRole.Storekeeper);
+                _service.AddUser(_currentUser,userName, password, UserRole.Storekeeper);
                 break;
             }
             case 2:
             {
-                _service.AddUser(userName, password, UserRole.Manager);
+                _service.AddUser(_currentUser, userName, password, UserRole.Manager);
                 break;
             }
             case 3:
             {
-                _service.AddUser(userName, password, UserRole.Admin);
+                _service.AddUser(_currentUser, userName, password, UserRole.Admin);
                 break;
             }
             default:
@@ -297,7 +299,7 @@ public class MainMenu
             Console.ReadKey();
             return;
         }
-        _service.RemoveUser(userId);
+        _service.RemoveUser(_currentUser ,userId);
     }
     private void AdminMenu()
     {

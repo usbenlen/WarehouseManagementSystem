@@ -3,13 +3,14 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using WarehouseManagementSystem.Task2_UserManagement;
 
 namespace WarehouseManagementSystem.Task1_DataModel.Products;
 
 public class Electronics : Product
 {
-    public DateTime warrantyPeriod { get; private set; } // Дата кінця гарантії
-    public double voltage { get; private set; } 
+    public DateTime warrantyPeriod { get; set; } // Дата кінця гарантії
+    public double voltage { get; set; } 
 
     public Electronics(DateTime warrantyPeriod,
         double voltage,
@@ -21,6 +22,16 @@ public class Electronics : Product
         this.warrantyPeriod = warrantyPeriod;
         this.voltage = voltage;
     }
+
+    public Electronics(BoxProduct boxProduct) : base(boxProduct.Name,
+        boxProduct.Price,
+        boxProduct.Weight,
+        boxProduct.Quantity)
+    {
+        warrantyPeriod = (DateTime)boxProduct.WarrantyDate;
+        voltage = (double)boxProduct.Voltage;
+    }
+    
 
     public bool IsWarrantyPeriodValid() //  перевірка на дійсність гарантії
     {

@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using WarehouseManagementSystem.Menu;
+using WarehouseManagementSystem.SaverLoader;
 using WarehouseManagementSystem.Task1_DataModel.Products;
 using WarehouseManagementSystem.Task3_WarehouseLogic.Interfaces;
 using WarehouseManagementSystem.Task3_WarehouseLogic.Events;
@@ -20,7 +21,15 @@ public class Warehouse : IInventoryControl, IComparer<Product>
     
     public Warehouse()
     {
-        _products = new List<Product>();
+        var data = Loader.LoadProducts();
+        if (data == null)
+        {
+            _products = new();
+        }
+        else
+        {
+            _products = data.ToList();
+        }
     }
     public void AddProduct(Product product)
     {
@@ -95,5 +104,10 @@ public class Warehouse : IInventoryControl, IComparer<Product>
         if (!xPershable && yPershable) return 1;
 
         return 0;
+    }
+
+    public void SaveProducts()
+    {
+        
     }
 }

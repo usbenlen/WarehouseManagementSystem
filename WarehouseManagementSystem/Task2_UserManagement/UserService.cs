@@ -6,17 +6,15 @@ namespace WarehouseManagementSystem.Task2_UserManagement;
 public class UserService : IUserService
 {
     private readonly List<User> _users;
+    private readonly UserStorage _userStorage;
 
-    public UserService()
+    public UserService(UserStorage userStorage)
     {
-        if (DeserializeUsers() != null)
+        _userStorage = userStorage;
+        _users = _userStorage.GetUsers();
+        if (_users.Count == 0)
         {
-            _users = DeserializeUsers();
-        }
-        else
-        {
-            _users = new();
-            _users.Add(new User("Admin","Admin",UserRole.Admin));
+            _users.Add(new User("admin","admin", UserRole.Admin));
         }
     }
     public User Register(string name, string password, UserRole role )
@@ -64,18 +62,8 @@ public class UserService : IUserService
         user?.ChangeRole(role);
     }
 
-    public void FlushToFileUser()
+    public void UserSave()
     {
-        string json = JsonConvert.SerializeObject(_users);
-        File.WriteAllText("users.json", json);
-    }
-    private List<User>? DeserializeUsers()
-    {
-        if (File.Exists("users.json"))
-        {
-            var data = JsonConvert.DeserializeObject<List<User>>(File.ReadAllText("users.json"));
-        }
-        return null;
-        
+        _userStorage.Save(_users);
     }
 }
