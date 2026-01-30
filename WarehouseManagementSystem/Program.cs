@@ -28,11 +28,25 @@ internal class Program
             userValidator ,
             logger
             ,userService);
-        var loginMenu = new LoginMenu(service);
-        var currentUser = loginMenu.Login();
-        var menu = new MainMenu(service, currentUser);
-        menu.Show();
-        
+
+        while (true)
+        {
+            var loginMenu = new LoginMenu(service);
+            var currentUser = loginMenu.Login();
+
+            if (currentUser == null)
+            {
+                Console.WriteLine("Login failed. Press any key to try again.");
+                Console.ReadKey();
+                continue;
+            }
+
+            var menu = new MainMenu(service, currentUser);
+            bool switchAccount = menu.Show();
+
+            if (!switchAccount) break;
+        }
+
         logger.FlushToFile();
     }
 }

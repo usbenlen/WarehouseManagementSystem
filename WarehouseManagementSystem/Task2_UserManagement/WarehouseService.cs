@@ -190,9 +190,10 @@ public class WarehouseService
             Console.ReadKey();
             return;
         }
-        _userService.BlockUser(userId);
+        _userService.UnblockUser(userId);
         Console.WriteLine("User unbanned");
         _logger.Info($"User: {user.UserName} Successfully unbanned {_userService.GetUser(userId)?.UserName}. {DateTime.Now}");
+        Console.ReadKey();
     }
 
     public void UpdateProduct(User user, Guid id, int choice, double? price, int? quantity)

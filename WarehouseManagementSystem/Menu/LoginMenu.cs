@@ -6,10 +6,7 @@ public class LoginMenu
 {
     private WarehouseService _service;
     
-    public LoginMenu(WarehouseService service)
-    {
-        _service = service;
-    }
+    public LoginMenu(WarehouseService service) { _service = service; }
 
     public User Login()
     {
@@ -27,10 +24,7 @@ public class LoginMenu
                 Console.WriteLine("Wrong username or password");
                 Console.ReadKey();
             }
-            else
-            {
-                return user;
-            }
+            else return user;
             
         }
     }
