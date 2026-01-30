@@ -27,7 +27,11 @@ public class Logger : ILogger
 
     public void FlushToFile()
     {
+        if (File.Exists("savedInfo/Log.txt"))
+        {
+            File.AppendAllLines(@"savedInfo/Log.txt", LogInfo);
+            return;
+        }
         File.WriteAllLines( "savedInfo/Log.txt", LogInfo);
-        
     }
 }
