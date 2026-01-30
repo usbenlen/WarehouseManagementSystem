@@ -20,7 +20,7 @@ public class MainMenu
 
     public bool Show()
     {
-        bool switchAccount = false; // true якщо обрано "Switch Account"
+        bool switchAccount = false;
 
         switch (_currentUser.Role)
         {
